@@ -18,8 +18,19 @@ class HomeController implements IHome {
       return 0;
     }
 
-    final cleanedNumbers = numbers.replaceAll('\n', ',');
-    final numList = cleanedNumbers.split(',').map(int.parse).toList();
+    String delimiter = ',';
+    String numbersToProcess = numbers;
+
+    if (numbers.startsWith('//')) {
+      final lines = numbers.split('\n');
+      if (lines.length >= 2) {
+        delimiter = lines[0].substring(2);
+        numbersToProcess = lines.sublist(1).join('\n');
+      }
+    }
+
+    final cleanedNumbers = numbersToProcess.replaceAll('\n', delimiter);
+    final numList = cleanedNumbers.split(delimiter).map(int.parse).toList();
     int sum = 0;
     for (int i = 0; i < numList.length; i++) {
       sum += numList[i];
