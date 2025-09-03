@@ -3,7 +3,6 @@ import 'package:tdd_incubyte_assignment/home/controllers/home.controller.dart';
 import 'package:tdd_incubyte_assignment/home/controllers/home.i.dart';
 
 void main() {
-
   late IHome controller;
 
   setUp(() {
@@ -26,5 +25,7 @@ void main() {
     expect(controller.add('1,2,3'), 6);
   });
 
-
+  test('handle new lines between numbers', () {
+    expect(controller.add('1\n2,3'), 6);
+  });
 }
