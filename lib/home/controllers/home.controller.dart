@@ -18,7 +18,8 @@ class HomeController implements IHome {
       return 0;
     }
 
-    final numList = numbers.split(',').map(int.parse).toList();
+    final cleanedNumbers = numbers.replaceAll('\n', ',');
+    final numList = cleanedNumbers.split(',').map(int.parse).toList();
     int sum = 0;
     for (int i = 0; i < numList.length; i++) {
       sum += numList[i];
