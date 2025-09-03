@@ -31,6 +31,14 @@ class HomeController implements IHome {
 
     final cleanedNumbers = numbersToProcess.replaceAll('\n', delimiter);
     final numList = cleanedNumbers.split(delimiter).map(int.parse).toList();
+
+    // Check for negative numbers
+    final negativeNumbers = numList.where((num) => num < 0).toList();
+    if (negativeNumbers.isNotEmpty) {
+      final negativeNumbersStr = negativeNumbers.join(',');
+      throw Exception('negative numbers not allowed $negativeNumbersStr');
+    }
+
     int sum = 0;
     for (int i = 0; i < numList.length; i++) {
       sum += numList[i];

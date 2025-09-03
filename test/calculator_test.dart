@@ -32,4 +32,18 @@ void main() {
   test('support custom delimiter', () {
     expect(controller.add('//;\n1;2'), 3);
   });
+
+  test('throw exception for single negative number', () {
+    expect(
+        () => controller.add('1,-2,3'),
+        throwsA(isA<Exception>().having((e) => e.toString(), 'message',
+            contains('negative numbers not allowed -2'))));
+  });
+
+  test('throw exception for multiple negative numbers', () {
+    expect(
+        () => controller.add('1,-2,3,-4'),
+        throwsA(isA<Exception>().having((e) => e.toString(), 'message',
+            contains('negative numbers not allowed -2,-4'))));
+  });
 }
