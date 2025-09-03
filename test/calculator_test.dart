@@ -28,4 +28,8 @@ void main() {
   test('handle new lines between numbers', () {
     expect(controller.add('1\n2,3'), 6);
   });
+
+  test('support custom delimiter', () {
+    expect(controller.add('//;\n1;2'), 3);
+  });
 }
